@@ -468,7 +468,36 @@ document.getElementById("internship").value);
 }
 
 function downloadPDF(){
-window.print();
+
+let resume =
+document.getElementById("resume").innerHTML;
+
+let newWin = window.open("");
+
+newWin.document.write(`
+<html>
+<head>
+<title>Resume PDF</title>
+<style>
+body{
+font-family:Arial,sans-serif;
+padding:20px;
+}
+img{
+max-width:120px;
+border-radius:50%;
+}
+</style>
+</head>
+<body>
+${resume}
+</body>
+</html>
+`);
+
+newWin.document.close();
+newWin.print();
+
 }
 
 function toggleDark(){
