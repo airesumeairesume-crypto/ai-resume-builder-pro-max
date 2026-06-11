@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AI Resume Builder Pro Max</title>
-
+<link rel="icon" type="image/png" href="1781151312081.png">
 <style>
 
 body{
@@ -261,7 +261,16 @@ Open Portfolio
 
 <script>
 function createResume(){
+let score = 0;
 
+if(document.getElementById("name").value) score += 10;
+if(document.getElementById("education").value) score += 10;
+if(document.getElementById("skills").value) score += 20;
+if(document.getElementById("experience").value) score += 20;
+if(document.getElementById("email").value) score += 10;
+if(document.getElementById("phone").value) score += 10;
+if(document.getElementById("projects").value) score += 10;
+if(document.getElementById("languages").value) score += 10;
 document.getElementById("rname").innerText =
 document.getElementById("name").value;
 
