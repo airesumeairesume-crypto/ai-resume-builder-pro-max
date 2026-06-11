@@ -479,16 +479,14 @@ document.getElementById("achievement").value);
 localStorage.setItem("internship",
 document.getElementById("internship").value);
 }
-}
-catch(err){
-alert(err);
-  }
 
-  }
+catch(err){
+  alert(err);
+}
 function downloadPDF(){
 
-let resume =
-document.getElementById("resume").innerHTML;
+  let resume =
+  document.getElementById("resume").innerHTML;
 
 let newWin = window.open("");
 
