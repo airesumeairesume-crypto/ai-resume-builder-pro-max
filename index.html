@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Resume Builder Pro Max</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f4f7fc;
+padding:20px;
+text-align:center;
+transition:0.3s;
+}
+
+.dark{
+background:#111827;
+color:white;
+}
+
+.score{
+background:#22c55e;
+color:white;
+padding:10px;
+border-radius:10px;
+margin:15px 0;
+font-weight:bold;
+text-align:center;
+}
+h1{
+color:#2563eb;
+}
+
+input,select{
+width:90%;
+max-width:450px;
+padding:12px;
+margin:8px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+padding:12px 18px;
+margin:8px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.card{
+background:white;
+max-width:700px;
+margin:auto;
+margin-top:20px;
+padding:20px;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+text-align:left;
+}
+
+.dark .card{
+background:#1f2937;
+color:white;
+}
+
+.template2{
+background:#ecfeff;
+border-left:8px solid #06b6d4;
+}
+
+.template3{
+background:#fef3c7;
+border-left:8px solid #f59e0b;
+}
+.template4{
+background:#1e293b;
+color:white;
+border-left:8px solid #22c55e;
+}
+
+.template5{
+background:#f3e8ff;
+border-left:8px solid #9333ea;
+}
+#rphoto{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:auto;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>AI Resume Builder Pro Max</h1>
+
+<input type="file" id="photo"><br>
+
+<input type="text" id="name" placeholder="Your Name"><br>
+
+<input type="text" id="education" placeholder="Education"><br>
+
+<input type="text" id="skills" placeholder="Skills"><br>
+
+<input type="text" id="experience" placeholder="Experience"><br>
+
+<input type="email" id="email" placeholder="Email"><br>
+
+<input type="text" id="phone" placeholder="Phone Number"><br>
+<input type="text" id="objective" placeholder="Career Objective"><br>
+
+<input type="text" id="projects" placeholder="Projects"><br>
+
+<input type="text" id="languages" placeholder="Languages"><br>
+
+<input type="text" id="hobbies" placeholder="Hobbies"><br>
+
+<input type="text" id="linkedin" placeholder="LinkedIn URL"><br>
+
+<input type="text" id="github" placeholder="GitHub URL"><br>
+<input type="text" id="certificate" placeholder="Certificates"><br>
+
+<input type="text" id="portfolio" placeholder="Portfolio Website"><br>
+<input type="text" id="achievement" placeholder="Achievements"><br>
+<input type="text" id="internship" placeholder="Internship"><br>
+<select id="template">
+<option value="1">Template 1</option>
+<option value="2">Template 2</option>
+<option value="3">Template 3</option>
+<option value="4">Template 4</option>
+<option value="5">Template 5</option>
+</select>
+
+<br>
+
+<button onclick="createResume()">
+Create Resume
+</button>
+
+<button onclick="downloadPDF()">
+Download PDF
+</button>
+
+<button onclick="toggleDark()">
+Dark Mode
+</button>
+<button onclick="shareResume()">
+Share Resume
+</button>
+<div class="card" id="resume">
+<div class="score">
+Resume Score:
+<span id="score">0</span>/100
+</div>
+<div class="score" id="atsBox">
+ATS Score:
+<span id="atsScore">0</span>%
+</div>
+
+<p id="atsTips"></p>
+<h2>Resume Preview</h2>
+
+<hr>
+
+<img id="rphoto" src="">
+
+<h2 id="rname">Your Name</h2>
+
+<p>
+📧 <span id="remail">-</span>
+|
+📞 <span id="rphone">-</span>
+</p>
+
+<hr>
+
+<h3>Education</h3>
+<p id="redu">-</p>
+
+<h3>Skills</h3>
+<p id="rskills">-</p>
+<div style="background:#ddd;border-radius:10px;">
+<div id="skillBar"
+style="
+height:20px;
+width:0%;
+background:#22c55e;
+border-radius:10px;
+text-align:center;
+color:white;">
+0%
+</div>
+</div>
+<h3>Experience</h3>
+<p id="rexp">-</p>
+<h3>Career Objective</h3>
+<p id="robjective">-</p>
+
+<h3>Projects</h3>
+<p id="rprojects">-</p>
+
+<h3>Languages</h3>
+<p id="rlanguages">-</p>
+
+<h3>Hobbies</h3>
+<p id="rhobbies">-</p>
+
+<h3>LinkedIn</h3>
+<p id="rlinkedin">-</p>
+
+<h3>GitHub</h3>
+<p id="rgithub">-</p>
+<h3>Certificates</h3>
+<p id="rcertificate">-</p>
+
+<h3>Portfolio</h3>
+<a id="rportfolio" href="#" target="_blank">
+Open Portfolio
+</a>
+<h3 id="achTitle">Achievements</h3>
+<p id="rachievement">-</p>
+
+<h3 id="intTitle">Internship</h3>
+<p id="rinternship">-</p>
+</div>
+
+<script>
+function createResume(){
+
+document.getElementById("rname").innerText =
+document.getElementById("name").value;
+
+document.getElementById("redu").innerText =
+document.getElementById("education").value;
+
+document.getElementById("rskills").innerText =
+document.getElementById("skills").value;
+let skillText =
+document.getElementById("skills").value;
+
+let skillCount =
+skillText.split(",").length;
+
+let skillPercent =
+Math.min(skillCount * 20, 100);
+
+document.getElementById("skillBar").style.width =
+skillPercent + "%";
+
+document.getElementById("skillBar").innerText =
+skillPercent + "%";
+document.getElementById("rexp").innerText =
+document.getElementById("experience").value;
+
+document.getElementById("remail").innerText =
+document.getElementById("email").value;
+
+document.getElementById("rphone").innerText =
+document.getElementById("phone").value;
+
+document.getElementById("robjective").innerText =
+document.getElementById("objective").value;
+
+document.getElementById("rprojects").innerText =
+document.getElementById("projects").value;
+
+document.getElementById("rlanguages").innerText =
+document.getElementById("languages").value;
+
+document.getElementById("rhobbies").innerText =
+document.getElementById("hobbies").value;
+
+document.getElementById("rlinkedin").innerText =
+document.getElementById("linkedin").value;
+
+document.getElementById("rgithub").innerText =
+document.getElementById("github").value;
+document.getElementById("rcertificate").innerText =
+document.getElementById("certificate").value;
+
+let portfolioLink =
+document.getElementById("portfolio").value;
+
+document.getElementById("rportfolio").href =
+portfolioLink;
+
+document.getElementById("rportfolio").innerText =
+portfolioLink;
+document.getElementById("rachievement").innerText =
+document.getElementById("achievement").value;
+document.getElementById("rinternship").innerText =
+document.getElementById("internship").value;
+if(document.getElementById("achievement").value==""){
+document.getElementById("achTitle").style.display="none";
+document.getElementById("rachievement").style.display="none";
+}else{
+document.getElementById("achTitle").style.display="block";
+document.getElementById("rachievement").style.display="block";
+}
+
+if(document.getElementById("internship").value==""){
+document.getElementById("intTitle").style.display="none";
+document.getElementById("rinternship").style.display="none";
+}else{
+document.getElementById("intTitle").style.display="block";
+document.getElementById("rinternship").style.display="block";
+}
+/* Resume Score */
+
+let score = 0;
+
+if(document.getElementById("name").value) score += 10;
+if(document.getElementById("education").value) score += 10;
+if(document.getElementById("skills").value) score += 10;
+if(document.getElementById("experience").value) score += 10;
+if(document.getElementById("email").value) score += 10;
+if(document.getElementById("phone").value) score += 10;
+if(document.getElementById("objective").value) score += 10;
+if(document.getElementById("projects").value) score += 10;
+if(document.getElementById("languages").value) score += 10;
+if(document.getElementById("hobbies").value) score += 10;
+
+document.getElementById("score").innerText = score;
+let ats = score;
+
+document.getElementById("atsScore").innerText = ats;
+
+let tips = "";
+
+if(!document.getElementById("skills").value)
+tips += "Add Skills<br>";
+
+if(!document.getElementById("projects").value)
+tips += "Add Projects<br>";
+
+if(!document.getElementById("experience").value)
+tips += "Add Experience<br>";
+
+if(!document.getElementById("internship").value)
+tips += "Add Internship<br>";
+
+if(tips=="")
+tips = "Excellent ATS Resume ✓";
+
+document.getElementById("atsTips").innerHTML = tips;
+
+/* Photo Upload */
+
+let file = document.getElementById("photo").files[0];
+
+if(file){
+
+let reader = new FileReader();
+
+reader.onload = function(e){
+document.getElementById("rphoto").src =
+e.target.result;
+}
+
+reader.readAsDataURL(file);
+
+}
+
+/* Template */
+
+let card = document.getElementById("resume");
+
+card.className = "card";
+
+let temp = document.getElementById("template").value;
+
+if(temp=="2"){
+card.classList.add("template2");
+}
+
+if(temp=="3"){
+card.classList.add("template3");
+}
+if(temp=="4"){
+card.classList.add("template4");
+}
+
+if(temp=="5"){
+card.classList.add("template5");
+}
+// Auto Save Data
+
+localStorage.setItem("name",
+document.getElementById("name").value);
+
+localStorage.setItem("education",
+document.getElementById("education").value);
+
+localStorage.setItem("skills",
+document.getElementById("skills").value);
+
+localStorage.setItem("experience",
+document.getElementById("experience").value);
+
+localStorage.setItem("email",
+document.getElementById("email").value);
+
+localStorage.setItem("phone",
+document.getElementById("phone").value);
+
+localStorage.setItem("objective",
+document.getElementById("objective").value);
+
+localStorage.setItem("projects",
+document.getElementById("projects").value);
+
+localStorage.setItem("languages",
+document.getElementById("languages").value);
+
+localStorage.setItem("hobbies",
+document.getElementById("hobbies").value);
+
+localStorage.setItem("linkedin",
+document.getElementById("linkedin").value);
+
+localStorage.setItem("github",
+document.getElementById("github").value);
+
+localStorage.setItem("certificate",
+document.getElementById("certificate").value);
+
+localStorage.setItem("portfolio",
+document.getElementById("portfolio").value);
+localStorage.setItem("achievement",
+document.getElementById("achievement").value);
+localStorage.setItem("internship",
+document.getElementById("internship").value);
+}
+
+function downloadPDF(){
+window.print();
+}
+
+function toggleDark(){
+document.body.classList.toggle("dark");
+}
+function shareResume(){
+
+let text =
+"Resume of " +
+document.getElementById("name").value +
+"\nSkills: " +
+document.getElementById("skills").value +
+"\nEducation: " +
+document.getElementById("education").value;
+
+if(navigator.share){
+
+navigator.share({
+title:"My Resume",
+text:text
+});
+
+}else{
+
+alert(text);
+
+}
+
+}
+// Auto Load Data
+
+window.onload = function(){
+
+document.getElementById("name").value =
+localStorage.getItem("name") || "";
+
+document.getElementById("education").value =
+localStorage.getItem("education") || "";
+
+document.getElementById("skills").value =
+localStorage.getItem("skills") || "";
+
+document.getElementById("experience").value =
+localStorage.getItem("experience") || "";
+
+document.getElementById("email").value =
+localStorage.getItem("email") || "";
+
+document.getElementById("phone").value =
+localStorage.getItem("phone") || "";
+
+document.getElementById("objective").value =
+localStorage.getItem("objective") || "";
+
+document.getElementById("projects").value =
+localStorage.getItem("projects") || "";
+
+document.getElementById("languages").value =
+localStorage.getItem("languages") || "";
+
+document.getElementById("hobbies").value =
+localStorage.getItem("hobbies") || "";
+
+document.getElementById("linkedin").value =
+localStorage.getItem("linkedin") || "";
+
+document.getElementById("github").value =
+localStorage.getItem("github") || "";
+
+document.getElementById("certificate").value =
+localStorage.getItem("certificate") || "";
+
+document.getElementById("portfolio").value =
+localStorage.getItem("portfolio") || "";
+document.getElementById("achievement").value =
+localStorage.getItem("achievement") || "";
+document.getElementById("internship").value =
+localStorage.getItem("internship") || "";
+}
+</script>
+
+</body>
+</html>
