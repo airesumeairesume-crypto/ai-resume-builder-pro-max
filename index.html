@@ -397,8 +397,8 @@ if(file){
 let reader = new FileReader();
 
 reader.onload = function(e){
-document.getElementById("rphoto").src =
-e.target.result;
+document.getElementById("rphoto").src = e.target.result;
+document.getElementById("rphoto").style.display = "block";
 }
 
 reader.readAsDataURL(file);
