@@ -577,7 +577,9 @@ localStorage.setItem("achievement",
 document.getElementById("achievement").value);
 localStorage.setItem("internship",
 document.getElementById("internship").value);
-
+document.getElementById("resume").scrollIntoView({
+behavior: "smooth"
+});
 }
 catch(err){
   alert("ERROR: " + err.message);
