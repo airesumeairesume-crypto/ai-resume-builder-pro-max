@@ -349,6 +349,21 @@ Open Portfolio
 function createResume(){
   
 try {
+  let email =
+document.getElementById("email").value;
+
+if(email && !email.includes("@")){
+alert("Please enter a valid email address");
+return;
+}
+
+let phone =
+document.getElementById("phone").value;
+
+if(phone && phone.length != 10){
+alert("Phone number must be 10 digits");
+return;
+}
 let score = 0;
 
 if(document.getElementById("name").value) score += 10;
