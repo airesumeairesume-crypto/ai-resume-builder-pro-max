@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://airesumeairesume-crypto.github.io/ai-resume-builder-pro-max/sitemap.xml
