@@ -207,6 +207,9 @@ Dark Mode
 <button onclick="shareResume()">
 Share Resume
 </button>
+  <button onclick="clearData()">
+Clear Saved Data
+  </button>
   <button onclick="loadSample()">
 Load Sample Resume
   </button>
@@ -219,6 +222,12 @@ document.getElementById("experience").value = "Frontend Developer Intern";
 document.getElementById("email").value = "rahul@example.com";
 document.getElementById("phone").value = "9876543210";
 }
+    function clearData() {
+
+localStorage.clear();
+
+location.reload();
+ }
   </script>
 <div class="card" id="resume">
 <div class="score">
