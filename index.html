@@ -288,6 +288,9 @@ Load Sample Resume
   <button onclick="generateCoverLetter()">
 Generate Cover Letter
   </button>
+  <button onclick="generateSummary()">
+Generate AI Summary
+  </button>
   <script>
 function loadSample() {
 document.getElementById("name").value = "Rahul Sharma";
@@ -385,6 +388,11 @@ Open Portfolio
 <div class="card" id="coverLetterBox" style="display:none;">
 <h2>Cover Letter</h2>
 <p id="coverLetterText"></p>
+</div>
+
+<div class="card" id="summaryBox" style="display:none;">
+<h2>AI Professional Summary</h2>
+<p id="summaryText"></p>
 </div>
 
 <script>
@@ -660,7 +668,25 @@ document.getElementById("coverLetterText").innerText = letter;
 document.getElementById("coverLetterBox").style.display = "block";
 
 }
+function generateSummary(){
 
+let skills = document.getElementById("skills").value;
+
+let experience =
+document.getElementById("experience").value;
+
+let summary =
+"Professional with experience in " +
+experience +
+" and skills in " +
+skills +
+". Passionate about delivering quality work and continuous learning.";
+
+document.getElementById("summaryText").innerText = summary;
+
+document.getElementById("summaryBox").style.display = "block";
+
+}
 function downloadPDF(){
   let resume =
   document.getElementById("resume").innerHTML;
