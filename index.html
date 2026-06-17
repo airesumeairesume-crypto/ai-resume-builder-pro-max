@@ -625,8 +625,42 @@ behavior: "smooth"
 }
 catch(err){
   alert("ERROR: " + err.message);
+
 }
 }
+
+function generateCoverLetter(){
+
+let name =
+document.getElementById("name").value;
+
+let skills =
+document.getElementById("skills").value;
+
+let experience =
+document.getElementById("experience").value;
+
+let jobrole =
+document.getElementById("jobrole").value;
+
+let company =
+document.getElementById("company").value;
+
+let letter =
+"Dear Hiring Manager,\n\n" +
+"I am applying for the " + jobrole +
+" position at " + company + ".\n\n" +
+"My name is " + name +
+" and I have skills in " + skills +
+". I also have experience in " + experience +
+".\n\nThank you for your time.\n\n" +
+"Sincerely,\n" + name;
+
+document.getElementById("coverLetterText").innerText = letter;
+document.getElementById("coverLetterBox").style.display = "block";
+
+}
+
 function downloadPDF(){
   let resume =
   document.getElementById("resume").innerHTML;
