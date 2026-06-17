@@ -291,6 +291,10 @@ Generate Cover Letter
   <button onclick="generateSummary()">
 Generate AI Summary
   </button>
+  
+  <button onclick="copyResume()">
+Copy Resume
+  </button>
   <script>
 function loadSample() {
 document.getElementById("name").value = "Rahul Sharma";
@@ -687,6 +691,16 @@ document.getElementById("summaryText").innerText = summary;
 document.getElementById("summaryBox").style.display = "block";
 
 }
+  function copyResume(){
+
+let resumeText =
+document.getElementById("resume").innerText;
+
+navigator.clipboard.writeText(resumeText);
+
+alert("Resume copied successfully!");
+
+  }
 function downloadPDF(){
   let resume =
   document.getElementById("resume").innerHTML;
