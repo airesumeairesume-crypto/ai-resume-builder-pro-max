@@ -295,6 +295,9 @@ Generate AI Summary
   <button onclick="copyResume()">
 Copy Resume
   </button>
+  <button onclick="generateQuestions()">
+Generate Interview Questions
+  </button>
   <script>
 function loadSample() {
 document.getElementById("name").value = "Rahul Sharma";
@@ -399,6 +402,11 @@ Open Portfolio
 <p id="summaryText"></p>
 </div>
 
+  <div class="card" id="questionBox" style="display:none;">
+<h2>AI Interview Questions</h2>
+<p id="questionText"></p>
+  </div>
+  
 <script>
 function createResume(){
   
@@ -700,6 +708,46 @@ navigator.clipboard.writeText(resumeText);
 
 alert("Resume copied successfully!");
 
+    function generateQuestions(){
+
+let skills =
+document.getElementById("skills").value;
+
+let jobrole =
+document.getElementById("jobrole").value;
+
+let questions =
+
+"Job Role: " + jobrole + "\n\n" +
+
+"1. Tell me about yourself?\n\n" +
+
+"2. What experience do you have in " + skills + "?\n\n" +
+
+"3. Why do you want to work as a " + jobrole + "?\n\n" +
+
+"4. What are your strengths?\n\n" +
+
+"5. What are your weaknesses?\n\n" +
+
+"6. Describe a difficult situation you solved.\n\n" +
+
+"7. Why should we hire you?\n\n" +
+
+"8. Where do you see yourself in 5 years?\n\n" +
+
+"9. How do you handle pressure at work?\n\n" +
+
+"10. What makes you different from other candidates?";
+
+document.getElementById("questionText").innerText =
+questions;
+
+document.getElementById("questionBox").style.display =
+"block";
+
+    }
+    
   }
 function downloadPDF(){
   let resume =
