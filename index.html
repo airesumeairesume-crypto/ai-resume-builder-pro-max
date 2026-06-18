@@ -255,6 +255,9 @@ airesumeairesume@gmail.com
 <input type="text" id="internship" placeholder="Internship"><br>
   <input type="text" id="jobrole" placeholder="Job Role"><br>
 <input type="text" id="company" placeholder="Company Name"><br>
+  <textarea id="jobdesc"
+placeholder="Paste Job Description Here"
+style="width:90%;max-width:450px;height:120px;padding:12px;margin:8px;border:1px solid #ccc;border-radius:8px;"></textarea><br>
 <select id="template">
 <option value="1">Template 1</option>
 <option value="2">Template 2</option>
@@ -313,6 +316,10 @@ Print Resume
 
   <button onclick="generateHeadline()">
 Generate Resume Headline
+  </button>
+
+  <button onclick="checkATSKeywords()">
+ATS Keyword Checker
   </button>
   <script>
 function loadSample() {
@@ -426,6 +433,47 @@ let headline =
 job + " | " + skills + " Specialist";
 
 alert("Resume Headline:\n\n" + headline);
+
+    }
+
+    function checkATSKeywords(){
+
+let skills =
+document.getElementById("skills").value.toLowerCase();
+
+let jd =
+document.getElementById("jobdesc").value.toLowerCase();
+
+if(jd==""){
+alert("Please paste Job Description first");
+return;
+}
+
+let keywords = [
+"html","css","javascript","react","node","sql",
+"python","java","communication","teamwork"
+];
+
+let found = [];
+let missing = [];
+
+keywords.forEach(function(word){
+
+if(jd.includes(word)){
+if(skills.includes(word)){
+found.push(word);
+}else{
+missing.push(word);
+}
+}
+
+});
+
+alert(
+"ATS Keyword Report\n\n" +
+"Found: " + found.join(", ") +
+"\n\nMissing: " + missing.join(", ")
+);
 
     }
 </script>
