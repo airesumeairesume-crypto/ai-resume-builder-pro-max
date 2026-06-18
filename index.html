@@ -306,6 +306,10 @@ AI Skill Suggestions
 <button onclick="downloadDOCX()">
 Download DOCX
 </button>
+
+  <button onclick="printResume()">
+Print Resume
+  </button>
   <script>
 function loadSample() {
 document.getElementById("name").value = "Rahul Sharma";
@@ -363,6 +367,48 @@ a.click();
 
     }
 
+    function downloadDOCX(){
+
+let content =
+document.getElementById("resume").innerText;
+
+let blob = new Blob(
+[content],
+{type:"application/msword"}
+);
+
+let a = document.createElement("a");
+
+a.href = URL.createObjectURL(blob);
+
+a.download = "Resume.doc";
+
+a.click();
+
+}
+
+function printResume(){
+
+let printContent =
+document.getElementById("resume").innerHTML;
+
+let win = window.open("");
+
+win.document.write(`
+<html>
+<head>
+<title>Print Resume</title>
+</head>
+<body>
+${printContent}
+</body>
+</html>
+`);
+
+win.document.close();
+win.print();
+
+}
 </script>
 <div class="card" id="resume">
 <div class="score">
