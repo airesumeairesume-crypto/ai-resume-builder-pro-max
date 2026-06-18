@@ -382,26 +382,6 @@ a.click();
 
     }
 
-    function downloadDOCX(){
-
-let content =
-document.getElementById("resume").innerText;
-
-let blob = new Blob(
-[content],
-{type:"application/msword"}
-);
-
-let a = document.createElement("a");
-
-a.href = URL.createObjectURL(blob);
-
-a.download = "Resume.doc";
-
-a.click();
-
-}
-
 function printResume(){
 
 let printContent =
@@ -479,9 +459,8 @@ alert(
 "\n\nMissing: " + missing.join(", ")
 );
 
-    }
+}
 
-    }
 
 function resumeStrength(){
 
@@ -513,8 +492,6 @@ alert(
 );
 
 }
-    
-</script>
 
 </script>
 
