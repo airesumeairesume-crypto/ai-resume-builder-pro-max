@@ -321,6 +321,10 @@ Generate Resume Headline
   <button onclick="checkATSKeywords()">
 ATS Keyword Checker
   </button>
+
+  <button onclick="resumeStrength()">
+Resume Strength Meter
+  </button>
   <script>
 function loadSample() {
 document.getElementById("name").value = "Rahul Sharma";
@@ -476,6 +480,40 @@ alert(
 );
 
     }
+
+    }
+
+function resumeStrength(){
+
+let score = 0;
+
+if(document.getElementById("name").value) score++;
+if(document.getElementById("education").value) score++;
+if(document.getElementById("skills").value) score++;
+if(document.getElementById("experience").value) score++;
+if(document.getElementById("projects").value) score++;
+if(document.getElementById("languages").value) score++;
+if(document.getElementById("internship").value) score++;
+if(document.getElementById("achievement").value) score++;
+
+let percent = Math.round((score / 8) * 100);
+
+let level = "Weak";
+
+if(percent >= 80){
+level = "Excellent";
+}else if(percent >= 60){
+level = "Good";
+}else if(percent >= 40){
+level = "Average";
+}
+
+alert(
+"Resume Strength: " + percent + "%\n\nLevel: " + level
+);
+
+}
+
 </script>
 <div class="card" id="resume">
 <div class="score">
