@@ -310,6 +310,10 @@ Download DOCX
   <button onclick="printResume()">
 Print Resume
   </button>
+
+  <button onclick="generateHeadline()">
+Generate Resume Headline
+  </button>
   <script>
 function loadSample() {
 document.getElementById("name").value = "Rahul Sharma";
@@ -409,6 +413,21 @@ win.document.close();
 win.print();
 
 }
+
+    function generateHeadline(){
+
+let job =
+document.getElementById("jobrole").value;
+
+let skills =
+document.getElementById("skills").value;
+
+let headline =
+job + " | " + skills + " Specialist";
+
+alert("Resume Headline:\n\n" + headline);
+
+    }
 </script>
 <div class="card" id="resume">
 <div class="score">
