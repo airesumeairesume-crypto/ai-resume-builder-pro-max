@@ -298,6 +298,14 @@ Copy Resume
   <button onclick="generateQuestions()">
 Generate Interview Questions
   </button>
+
+  <button onclick="suggestSkills()">
+AI Skill Suggestions
+</button>
+
+<button onclick="downloadDOCX()">
+Download DOCX
+</button>
   <script>
 function loadSample() {
 document.getElementById("name").value = "Rahul Sharma";
@@ -313,6 +321,48 @@ localStorage.clear();
 
 location.reload();
  }
+
+    function suggestSkills(){
+
+let job =
+document.getElementById("jobrole").value.toLowerCase();
+
+let result = "";
+
+if(job.includes("frontend")){
+result = "HTML, CSS, JavaScript, React, Git";
+}
+else if(job.includes("backend")){
+result = "Node.js, Express.js, MongoDB, SQL";
+}
+else{
+result = "Communication, Problem Solving, Teamwork";
+}
+
+alert("Suggested Skills:\n\n" + result);
+
+}
+
+function downloadDOCX(){
+
+let content =
+document.getElementById("resume").innerText;
+
+let blob = new Blob(
+[content],
+{type:"application/msword"}
+);
+
+let a = document.createElement("a");
+
+a.href = URL.createObjectURL(blob);
+
+a.download = "Resume.doc";
+
+a.click();
+
+    }
+
 </script>
 <div class="card" id="resume">
 <div class="score">
